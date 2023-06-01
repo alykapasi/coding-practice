@@ -1,7 +1,7 @@
 import timeit
 
 # Leetcode 2185 (05/30/2023)
-# Define your functions
+# Defining functions
 
 # brute force algorithm -> splice the word and check if the splice == pref
 def prefixCount1(words, pref):
