@@ -42,7 +42,7 @@ time2 = timeit.timeit(lambda: prefixCount2(words, pref), number=10000)
 time3 = timeit.timeit(lambda: prefixCount3(words, pref), number=10000)
 
 # Measure the runtime of prefixCount3
-time4 = timeit.timeit(lambda: prefixCount3(words, pref), number=10000)
+time4 = timeit.timeit(lambda: prefixCount4(words, pref), number=10000)
 
 # Print the runtimes
 print("Runtime for prefixCount1:", time1)

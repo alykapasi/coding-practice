@@ -27,19 +27,18 @@ nums1 = [3, 4, 5, 2]
 nums2 = [1, 5, 4, 5]
 nums3 = [3, 7]
 
-# Measure the runtime of maxProduct1
+# Measure the runtime of case 1
 time1a = timeit.timeit(lambda: maxProduct1(nums1), number=10000)
 time1b = timeit.timeit(lambda: maxProduct2(nums1), number=10000)
 
-# Measure the runtime of maxProduct2
+# Measure the runtime of case 2
 time2a = timeit.timeit(lambda: maxProduct1(nums2), number=10000)
 time2b = timeit.timeit(lambda: maxProduct2(nums2), number=10000)
 
-# Measure the runtime of maxProduct3
+# Measure the runtime of case 3
 time3a = timeit.timeit(lambda: maxProduct1(nums3), number=10000)
 time3b = timeit.timeit(lambda: maxProduct2(nums3), number=10000)
 
 # Print the runtimes
 print("Runtime (maxProduct1):", time1a, time2a, time3a)
 print("Runtime (maxProduct2):", time1b, time2b, time3b)
-
