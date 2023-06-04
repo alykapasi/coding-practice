@@ -29,7 +29,7 @@ def isSameAfterReversals2(num: int):
 
 # Check if the last char is 0 if yes return False
 def isSameAfterReversals3(num: int):
-        return not str(num)[-1] == '0' if num != 0 else True
+        return num % 10 != 0 if num != 0 else True
 
 # Measure the runtime using different test cases
 time1a = timeit.timeit(lambda: isSameAfterReversals1(526), number=10000)
@@ -47,7 +47,5 @@ time3c = timeit.timeit(lambda: isSameAfterReversals3(0), number=10000)
 
 # Print the runtimes
 print("Runtime (evenOddBit1):", time1a, time2a, time3a)
-print('\n')
 print("Runtime (evenOddBit2):", time1b, time2b, time3b)
-print('\n')
 print("Runtime (evenOddBit3):", time1c, time2c, time3c)
