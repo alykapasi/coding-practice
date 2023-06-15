@@ -1,10 +1,11 @@
 import timeit
+from typing import List
 
 # Leetcode 1464 (05/31/2023)
 # Defining functions
 
 # Brute force solution - check the entire list
-def maxProduct1(nums):
+def maxProduct1(nums: List[int]):
     max1 = max2 = float('-inf')
 
     for num in nums:
@@ -18,7 +19,7 @@ def maxProduct1(nums):
 
 
 # Sort the array, get the product of first 2 sorted
-def maxProduct2(nums):
+def maxProduct2(nums: List[int]):
     nums = sorted(nums, reverse=True)
     return (nums[0] - 1) * (nums[1] - 1)
 

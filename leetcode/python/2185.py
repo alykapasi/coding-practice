@@ -1,10 +1,11 @@
 import timeit
+from typing import List
 
 # Leetcode 2185 (05/30/2023)
 # Defining functions
 
 # brute force algorithm -> splice the word and check if the splice == pref
-def prefixCount1(words, pref):
+def prefixCount1(words: List[str], pref: str):
     i = 0
     pref_length = len(pref)
     for word in words:
@@ -13,15 +14,15 @@ def prefixCount1(words, pref):
     return i
 
 # use list comprehension and add the array to find match amount
-def prefixCount2(words, pref):
+def prefixCount2(words: List[str], pref: str):
     return sum([1 for word in words if word[:len(pref)] == pref])
 
 # improve the speed by using startswith which involves less overhead than splicing
-def prefixCount3(words, pref):
+def prefixCount3(words: List[str], pref: str):
     return sum([1 for word in words if word.startswith(pref)])
 
 # since the 1st solution was the fastest -> improve speed by changing splice to startswith()
-def prefixCount4(words, pref):
+def prefixCount4(words: List[str], pref: str):
     i = 0
     for word in words:
         if word.startswith(pref):

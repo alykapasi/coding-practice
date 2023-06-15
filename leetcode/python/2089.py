@@ -1,10 +1,11 @@
 import timeit
+from typing import List
 
 # Leetcode 2089 (06/02/2023)
 # Defining functions
 
 # Brute force solution
-def targetIndices1(nums, target):
+def targetIndices1(nums: List[int], target: int):
     ans = []
     nums = sorted(nums)
     for i in range(len(nums)):
@@ -12,7 +13,7 @@ def targetIndices1(nums, target):
     return ans
 
 # minor improvement using enumerate and break when item > target
-def targetIndices2(nums, target):
+def targetIndices2(nums: List[int], target: int):
     ans = []
     for i, n in enumerate(sorted(nums)):
         if n == target:

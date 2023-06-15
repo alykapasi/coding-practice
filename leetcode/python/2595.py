@@ -3,8 +3,8 @@ import timeit
 # Leetcode 2595 (06/01/2023)
 # Defining functions
 
-# brute force
-def evenOddBit1(n):
+# Brute force
+def evenOddBit1(n: int):
     binary = bin(n)[2:]
     n_bits = len(binary)
     ans = [0,0]
@@ -15,7 +15,7 @@ def evenOddBit1(n):
     return ans
 
 # using bit manipulation
-def evenOddBit2(n):
+def evenOddBit2(n: int):
     n_bits = len(bin(n)) - 2
     ans = [0,0]
     for i in range(n_bits):
