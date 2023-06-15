@@ -28,7 +28,7 @@ def cond3(s: str):
 
 count = 0    
 ans = sum([1 for i in split_data if (cond1(i) and cond2(i) and cond3(i)) == True])
-#submit(ans, part='a', day=5, year=2015)
+submit(ans, part='a', day=5, year=2015)
 
 ## part 5b
 ## condition 1(NEW) - if there are 2 consecutive characters that repeat with some character in between

@@ -40,5 +40,5 @@ time3a = timeit.timeit(lambda: maxProduct1(nums3), number=10000)
 time3b = timeit.timeit(lambda: maxProduct2(nums3), number=10000)
 
 # Print the runtimes
-print("Runtime (maxProduct1):", time1a, time2a, time3a)
-print("Runtime (maxProduct2):", time1b, time2b, time3b)
+print("Runtime (maxProduct1):", time1a, time2a, time3a) #2
+print("Runtime (maxProduct2):", time1b, time2b, time3b) #1

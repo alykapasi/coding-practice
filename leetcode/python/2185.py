@@ -45,7 +45,7 @@ time3 = timeit.timeit(lambda: prefixCount3(words, pref), number=10000)
 time4 = timeit.timeit(lambda: prefixCount4(words, pref), number=10000)
 
 # Print the runtimes
-print("Runtime for prefixCount1:", time1)
-print("Runtime for prefixCount2:", time2)
-print("Runtime for prefixCount3:", time3)
-print("Runtime for prefixCount4:", time4)
+print("Runtime for prefixCount1:", time1) #2
+print("Runtime for prefixCount2:", time2) #4
+print("Runtime for prefixCount3:", time3) #3
+print("Runtime for prefixCount4:", time4) #1

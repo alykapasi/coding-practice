@@ -46,6 +46,6 @@ time3b = timeit.timeit(lambda: isSameAfterReversals2(0), number=10000)
 time3c = timeit.timeit(lambda: isSameAfterReversals3(0), number=10000)
 
 # Print the runtimes
-print("Runtime (evenOddBit1):", time1a, time2a, time3a)
-print("Runtime (evenOddBit2):", time1b, time2b, time3b)
-print("Runtime (evenOddBit3):", time1c, time2c, time3c)
+print("Runtime (evenOddBit1):", time1a, time2a, time3a) # 2 (larger numbers)
+print("Runtime (evenOddBit2):", time1b, time2b, time3b) # 2 (smaller numbers)
+print("Runtime (evenOddBit3):", time1c, time2c, time3c) #1

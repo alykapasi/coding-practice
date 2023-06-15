@@ -28,12 +28,12 @@ def evenOddBit2(n):
 time1a = timeit.timeit(lambda: evenOddBit1(17), number=10000)
 time1b = timeit.timeit(lambda: evenOddBit2(17), number=10000)
 
-time2a = timeit.timeit(lambda: evenOddBit1(2), number=10000)
-time2b = timeit.timeit(lambda: evenOddBit2(2), number=10000)
+time2a = timeit.timeit(lambda: evenOddBit1(2456005), number=10000)
+time2b = timeit.timeit(lambda: evenOddBit2(2456005), number=10000)
 
-time3a = timeit.timeit(lambda: evenOddBit1(654), number=10000)
-time3b = timeit.timeit(lambda: evenOddBit2(654), number=10000)
+time3a = timeit.timeit(lambda: evenOddBit1(6548632466578), number=10000)
+time3b = timeit.timeit(lambda: evenOddBit2(6548632466578), number=10000)
 
 # Print the runtimes
-print("Runtime (evenOddBit1):", time1a, time2a, time3a)
-print("Runtime (evenOddBit2):", time1b, time2b, time3b)
+print("Runtime (evenOddBit1):", time1a, time2a, time3a) #faster for large numbers
+print("Runtime (evenOddBit2):", time1b, time2b, time3b) #faster for small numbers
