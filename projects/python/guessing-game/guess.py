@@ -1,65 +1,105 @@
-from random import randint
+## imperative / functional approach
+
+from random import randint, seed
+seed(42)
 
 affirm = ["y", "yes", "yup", "sure", "ok", "okay", "yeah", "yea", "yeahh", "ye", "yessir", "yep"]
 
-def game():
-    num = randint(1, 100)
-    tries = 10
-    while tries > 0:
-        guess = int(input("Guess a number between 1 and 100: "))
-        if guess == num:
-            tries -= 1
-            print(f"You win! It only took you {10-tries} tries! :)")
-            break
-        elif guess < num:
-            print("Too low!")
-        else:
-            print("Too high!")
-        tries -= 1
-        print(f"You have {tries} tries left.")
-    print(f"The number was {num}.")
+def get_integer_input(prompt, min_val=None, max_val=None):
+    """Get an integer input from the user with optional min and max bounds."""
+    while True:
+        try:
+            value = int(input(prompt))
+            if min_val is not None and value < min_val:
+                print(f"Please enter a number greater than or equal to {min_val}.")
+                continue
+            if max_val is not None and value > max_val:
+                print(f"Please enter a number less than or equal to {max_val}.")
+                continue
+            return value
+        except ValueError:
+            print("Please enter a valid integer.")
 
-def play_game():
-    num = randint(1, 100)
+def get_feedback(num, guess, prev_guess=None):
+    """Returns feedback based on the player's guess."""
+    if guess == num:
+        return "correct"
+    elif prev_guess is None:
+        return "low" if guess < num else "high"
+    else:
+        delta = abs(guess - num)
+        prev_delta = abs(prev_guess - num)
+        if delta < prev_delta:
+            return "warmer"
+        else:
+            return "colder"
+
+def get_bounds():
+    """Get the minimum and maximum bounds for the game."""
+    min_bound = get_integer_input("Enter the minimum bound: ")
+    max_bound = get_integer_input("Enter the maximum bound: ")
+    while min_bound >= max_bound:
+        print("The maximum bound must be greater than the minimum bound.")
+        min_bound = get_integer_input("Enter the minimum bound: ")
+        max_bound = get_integer_input("Enter the maximum bound: ")
+    return min_bound, max_bound
+
+def game(min_bound, max_bound):
+    num = randint(min_bound, max_bound)
     tries = 10
-    prev = []
+    prev_guesses = []
+    
     while tries > 0:
-        guess = int(input("Guess a number between 1 and 100: "))
-        if guess == num:
-            tries -= 1
-            print(f"You win! It only took you {10-tries} tries! :)")
-            break
-        if guess in prev:
+        guess = get_integer_input(f"Guess a number between {min_bound} and {max_bound}: ", min_bound, max_bound)
+        
+        if guess in prev_guesses:
             print("You already guessed that!")
             continue
-        if len(prev) == 0:
-            if guess < num:
-                print("Too low!")
-            else:
-                print("Too high!")
-            prev.append(guess)
-        else:
-            delta = abs(guess - num)
-            prev_delta = abs(prev[-1] - num)
-            if delta < prev_delta:
-                print("Getting warmer!")
-            else:
-                print("Getting colder!")
-            prev.append(guess)
+        
+        prev_guesses.append(guess)
+        feedback = get_feedback(num, guess, prev_guesses[-2] if len(prev_guesses) > 1 else None)
+        
+        if feedback == "correct":
+            print(f"You win! It only took you {10 - tries + 1} tries! :)")
+            break
+        elif feedback == "low":
+            print("Too low!")
+        elif feedback == "high":
+            print("Too high!")
+        elif feedback == "warmer":
+            print("Warmer!")
+        elif feedback == "colder":
+            print("Colder!")
+        
         tries -= 1
-        print(f"You have {tries} tries left.")
-    if tries == 0:
-        print("You ran out of tries! :(")
-    print(f"The number was {num}.")
+
+    if feedback != "correct":
+        print(f"You lost! The correct number was {num}.")
+
+def test_game(inputs, min_bound, max_bound, expected_output):
+    def mock_input(prompt):
+        return inputs.pop(0)
+    
+    global input
+    input = mock_input
+    game(min_bound, max_bound)
+    print(expected_output)
 
 if __name__ == "__main__":
-    while True:
-        gameNum = 0
-        while gameNum not in [1, 2]:
-            gameNum = int(input("Which guessing game do you want to play?\n1. Lower-Higher or\n2. Hot-Cold?\n"))
-        if gameNum == 1: game()
-        else: play_game()
-        again = input("Do you want to play again? (y/n) ")
-        if again.lower() not in affirm: 
-            print("Thanks for playing!")
-            break
+    min_bound, max_bound = get_bounds()
+    game(min_bound, max_bound)
+
+    # Test Case 1: User correctly guesses the number
+    test_game(inputs=["50"], min_bound=1, max_bound=100, expected_output="You win! It only took you 1 tries! :)")
+
+    # Test Case 2: User's guesses get progressively closer to the number
+    test_game(inputs=["10", "20", "30", "40", "50"], min_bound=1, max_bound=100, expected_output="You win! It only took you 5 tries! :)")
+
+    # Test Case 3: User's guesses get progressively farther from the number
+    test_game(inputs=["50", "40", "30", "20", "10"], min_bound=1, max_bound=100, expected_output="You lost! The correct number was 51.")
+
+    # Test Case 4: User runs out of tries
+    test_game(inputs=["10", "20", "30", "40", "60", "70", "80", "90", "100", "1"], min_bound=1, max_bound=100, expected_output="You lost! The correct number was 51.")
+
+    # Test Case 5: User repeatedly guesses the same number
+    test_game(inputs=["50", "50", "50", "50", "50", "50", "50", "50", "50", "50"], min_bound=1, max_bound=100, expected_output="You win! It only took you 1 tries! :)")
