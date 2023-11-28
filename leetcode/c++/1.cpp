@@ -1,7 +1,6 @@
 // Leetcode 1 - Two Sum
 // Nov. 24, 2023
 
-#include <iostream>
 #include <unordered_map>
 #include <vector>
 

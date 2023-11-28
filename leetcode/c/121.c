@@ -1,9 +1,6 @@
 // Leetcode 121 - Best Time to Buy and Sell Stocks
 // Nov. 25, 2023
 
-#include <stdio.h>
-#include <stdlib.h>
-
 // refactored for efficiency
 int maxProfit(int* prices, int pricesSize) {
     if (pricesSize == 0) return 0;
