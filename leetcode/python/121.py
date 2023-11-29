@@ -5,6 +5,13 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
+        profit, buy = 0, prices[0]
+        for sell in prices:
+            profit = max(profit, sell - buy)
+            buy = min(buy, sell)
+        return profit
+
+    def maxProfit1(self, prices: List[int]) -> int:
         # use the two pointers technique
         profit, buy, sell = 0, 0, 1
         while sell < len(prices):
